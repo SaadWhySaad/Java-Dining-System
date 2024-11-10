@@ -32,4 +32,9 @@ public class RestaurantController {
 
     }
 
+    @GetMapping("/getbyid/{id}")
+    ResponseEntity<Message<Restaurant>> getById(@PathVariable Long id){
+        return ResponseEntity.ok(this.restaurantService.getById(id));
+    }
+
 }

@@ -2,7 +2,9 @@ package com.diningsystem.dining.system.service;
 
 
 import com.diningsystem.dining.system.exception.EntityNotFoundException;
+import com.diningsystem.dining.system.exception.InternalServerErrorException;
 import com.diningsystem.dining.system.model.Restaurant;
+import com.diningsystem.dining.system.model.RestaurantItem;
 import com.diningsystem.dining.system.repo.RestaurantRepository;
 import com.diningsystem.dining.system.response.Message;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -52,5 +54,21 @@ public class RestaurantService {
         throw new EntityNotFoundException("Restaurants not found.");
 
     }
+
+    public Message<Restaurant> getById(Long id){
+        Restaurant restaurant = this.restaurantRepository.findById(id).orElseThrow(()->new EntityNotFoundException("Restaurant not found."));
+        if(restaurant.getIsActive()){
+            Message message = new Message();
+            message.setCode(HttpStatus.OK.value());
+            message.setStatus(HttpStatus.OK.name());
+            message.setMessage("Restaurant Fetched.");
+            message.setData(restaurant);
+            return message;
+        }
+
+        throw new InternalServerErrorException("Server Error");
+
+    }
+
 
 }

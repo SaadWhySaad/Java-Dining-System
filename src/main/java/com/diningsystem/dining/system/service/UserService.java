@@ -25,7 +25,7 @@ import java.util.Objects;
 @NoArgsConstructor
 @AllArgsConstructor
 @Service
-public class UserService {
+public class    UserService {
 
     @Autowired
     UserRepository userRepository;

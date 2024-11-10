@@ -28,6 +28,7 @@ public class Restaurant {
     private LocalTime openTime;
     private LocalTime closeTime;
     private String rating;
+    private Long gstTax;
     private LocalDate createdAt;
     private Boolean isActive;
 
